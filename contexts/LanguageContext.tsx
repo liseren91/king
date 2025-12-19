@@ -11,7 +11,12 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('ru'); // Default to RU based on last request
+  const getInitialLanguage = (): Language => {
+    const browserLang = (navigator.language || 'en').toLowerCase();
+    return browserLang.startsWith('ru') ? 'ru' : 'en';
+  };
+
+  const [language, setLanguage] = useState<Language>(getInitialLanguage());
 
   const value = {
     language,

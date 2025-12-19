@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
@@ -14,7 +15,11 @@ const Footer: React.FC = () => {
         </p>
         <div className="flex justify-center space-x-6 text-sm text-gray-500 font-fantasy tracking-widest">
           {t.footer.links.map((link, i) => (
-             <a key={i} href="#" className="hover:text-amber-500 transition-colors">{link}</a>
+             i === 2 ? (
+               <Link key={i} to="/master" className="hover:text-amber-500 transition-colors">{link}</Link>
+             ) : (
+               <a key={i} href="#" className="hover:text-amber-500 transition-colors">{link}</a>
+             )
           ))}
         </div>
         <div className="mt-8 text-xs text-gray-700">
